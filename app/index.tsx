@@ -1,7 +1,8 @@
+import BottomTabsNavigation from "../components/navigation/BottomTabsNavigation";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-
-import BottomTabsNavigation from "../components/navigation/BottomTabsNavigation";
+import { GlobalStyles } from "../constants/styles";
 import "react-native-reanimated";
 
 const Stack = createNativeStackNavigator();
@@ -13,7 +14,7 @@ export default function Index() {
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#c6affc",
+            backgroundColor: GlobalStyles.colors.primary100,
           },
           headerTintColor: "white",
         }}>
