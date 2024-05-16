@@ -62,25 +62,28 @@ const DUMMY_DATA = [
 const displayNearEarthObjects = (itemData) => {
   const nearEarthObject = itemData.item;
   const title = nearEarthObject.name;
+  const shortList = [
+    {
+      title: "Approximate diameter in feet:",
+      value: `Min: ${nearEarthObject.approximateDiameterInFeet.minDiameter} Max: ${nearEarthObject.approximateDiameterInFeet.maxDiameter}`,
+    },
+    {
+      title: "Relative velocity in miles per hour:",
+      value: nearEarthObject.relativeVelocityInMilesPerHour,
+    },
+    {
+      title: "Miss distance in miles:",
+      value: nearEarthObject.missDistanceInMiles,
+    },
+    {
+      title: "Potentially hazardous:",
+      value: nearEarthObject.potentiallyHazardousAsteroid,
+    },
+  ];
   const detailsTitleValueData = {
-    shortList: [
-      {
-        title: "Approximate diameter in feet:",
-        value: `Min: ${nearEarthObject.approximateDiameterInFeet.minDiameter} Max: ${nearEarthObject.approximateDiameterInFeet.maxDiameter}`,
-      },
-      {
-        title: "Relative velocity in miles per hour:",
-        value: nearEarthObject.relativeVelocityInMilesPerHour,
-      },
-      {
-        title: "Miss distance in miles:",
-        value: nearEarthObject.missDistanceInMiles,
-      },
-      {
-        title: "Potentially hazardous:",
-        value: nearEarthObject.potentiallyHazardousAsteroid,
-      },
-    ],
+    id: nearEarthObject.id,
+    shortList: shortList,
+    longList: [...shortList],
   };
 
   return (

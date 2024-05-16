@@ -2,14 +2,14 @@ import { Text, StyleSheet, Pressable } from "react-native";
 import { GlobalStyles } from "@/constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 
-const IconButton = ({ iconName, buttonTitle, activeStateButton }) => {
+const IconButton = ({ iconName, buttonTitle, activeStateButton, onPress }) => {
   const activeTextColor = activeStateButton
-    ? GlobalStyles.colors.primary700
-    : GlobalStyles.colors.primary50;
-
-  const buttonBackgroundColor = activeStateButton
     ? GlobalStyles.colors.primary50
     : GlobalStyles.colors.primary700;
+
+  const buttonBackgroundColor = activeStateButton
+    ? GlobalStyles.colors.primary700
+    : GlobalStyles.colors.primary50;
 
   return (
     <Pressable
@@ -17,7 +17,7 @@ const IconButton = ({ iconName, buttonTitle, activeStateButton }) => {
         styles.buttonContainer,
         { backgroundColor: buttonBackgroundColor },
       ]}
-      onPress={() => console.log("needs added logic ===>")}>
+      onPress={onPress}>
       <Text style={[styles.buttonTitle, { color: activeTextColor }]}>
         {buttonTitle}
       </Text>

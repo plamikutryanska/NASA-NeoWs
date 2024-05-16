@@ -1,18 +1,37 @@
+import { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { GlobalStyles } from "@/constants/styles";
 
 import IconButton from "@/components/shared/IconButton";
+import { WatchListContext } from "../store/context/watchListContext";
 
 const NearEarthObject = ({ route }) => {
+  const context = useContext(WatchListContext);
+
   const detailsData = route.params.detailsData;
+  const neoId = detailsData.data.id;
+
+  const neoIsInWatchList = context.watchList.includes(neoId);
+  const buttonTitle = neoIsInWatchList
+    ? "Remove from Watch List"
+    : "Add to Watch List";
+
+  const changeWatchListStatus = () => {
+    if (neoIsInWatchList) {
+      context.removeFromWatchList(neoId);
+    } else {
+      context.addToWatchList(neoId);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.name}>{detailsData.name}</Text>
       <IconButton
-        buttonTitle={"Add to Watch List"}
+        buttonTitle={buttonTitle}
         iconName={"eye"}
-        activeStateButton={true} //needs logic
+        activeStateButton={neoIsInWatchList}
+        onPress={changeWatchListStatus}
       />
     </View>
   );
