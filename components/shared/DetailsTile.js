@@ -2,34 +2,15 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { GlobalStyles } from "@/constants/styles";
 import { useNavigation } from "@react-navigation/native";
 
-const DetailsTile = (detailsData) => {
-  const {
-    name,
-    id,
-    approximateDiameterInFeet: { minDiameter, maxDiameter } = {},
-    relativeVelocityInMilesPerHour,
-    missDistanceInMiles,
-    potentiallyHazardousAsteroid,
-  } = detailsData;
-
-  const detailsTitleValueData = [
-    {
-      title: "Approximate diameter in feet:",
-      value: `Min: ${minDiameter} Max: ${maxDiameter}`,
-    },
-    {
-      title: "Relative velocity in miles per hour:",
-      value: relativeVelocityInMilesPerHour,
-    },
-    { title: "Miss distance in miles:", value: missDistanceInMiles },
-    { title: "Potentially hazardous:", value: potentiallyHazardousAsteroid },
-  ];
-
+const DetailsTile = ({ tileTitle, tileDetailsData }) => {
   const navigation = useNavigation();
 
   const openDetailsModalHandler = () => {
     navigation.navigate("NearEarthObject", {
-      neoId: id,
+      detailsData: {
+        name: tileTitle,
+        data: tileDetailsData,
+      },
     });
   };
 
@@ -40,10 +21,10 @@ const DetailsTile = (detailsData) => {
       }
       onPress={openDetailsModalHandler}>
       <View style={styles.sectionHeader}>
-        <Text style={styles.objectName}>{name}</Text>
+        <Text style={styles.objectName}>{tileTitle}</Text>
       </View>
       <View style={styles.objectDetailsContainer}>
-        {detailsTitleValueData.map((data, index) => {
+        {tileDetailsData.shortList.map((data, index) => {
           return (
             <View key={index}>
               <Text style={styles.objectDetailsTitle}>{data.title}</Text>

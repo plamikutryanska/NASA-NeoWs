@@ -60,7 +60,32 @@ const DUMMY_DATA = [
 ];
 
 const displayNearEarthObjects = (itemData) => {
-  return <DetailsTile {...itemData.item} />;
+  const nearEarthObject = itemData.item;
+  const title = nearEarthObject.name;
+  const detailsTitleValueData = {
+    shortList: [
+      {
+        title: "Approximate diameter in feet:",
+        value: `Min: ${nearEarthObject.approximateDiameterInFeet.minDiameter} Max: ${nearEarthObject.approximateDiameterInFeet.maxDiameter}`,
+      },
+      {
+        title: "Relative velocity in miles per hour:",
+        value: nearEarthObject.relativeVelocityInMilesPerHour,
+      },
+      {
+        title: "Miss distance in miles:",
+        value: nearEarthObject.missDistanceInMiles,
+      },
+      {
+        title: "Potentially hazardous:",
+        value: nearEarthObject.potentiallyHazardousAsteroid,
+      },
+    ],
+  };
+
+  return (
+    <DetailsTile tileTitle={title} tileDetailsData={detailsTitleValueData} />
+  );
 };
 
 const NearEarthObjects = () => {
