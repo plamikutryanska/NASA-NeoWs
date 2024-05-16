@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import { GlobalStyles } from "@/constants/styles";
+import { useNavigation } from "@react-navigation/native";
 
 const DetailsTile = (detailsData) => {
   const {
     name,
+    id,
     approximateDiameterInFeet: { minDiameter, maxDiameter } = {},
     relativeVelocityInMilesPerHour,
     missDistanceInMiles,
@@ -23,8 +25,20 @@ const DetailsTile = (detailsData) => {
     { title: "Potentially hazardous:", value: potentiallyHazardousAsteroid },
   ];
 
+  const navigation = useNavigation();
+
+  const openDetailsModalHandler = () => {
+    navigation.navigate("NearEarthObject", {
+      neoId: id,
+    });
+  };
+
   return (
-    <View style={styles.tileContainer}>
+    <Pressable
+      style={({ pressed }) =>
+        pressed ? [styles.tileContainer, styles.pressed] : styles.tileContainer
+      }
+      onPress={openDetailsModalHandler}>
       <View style={styles.sectionHeader}>
         <Text style={styles.objectName}>{name}</Text>
       </View>
@@ -38,7 +52,7 @@ const DetailsTile = (detailsData) => {
           );
         })}
       </View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -77,5 +91,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginVertical: 4,
     color: GlobalStyles.colors.primary700,
+  },
+  pressed: {
+    opacity: 0.75,
   },
 });
