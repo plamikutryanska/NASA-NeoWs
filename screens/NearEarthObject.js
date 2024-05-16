@@ -50,15 +50,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: GlobalStyles.colors.primary700,
   },
-  shadow: {
-    elevation: 3,
-    shadowColor: GlobalStyles.colors.gray500,
-    shadowRadius: 4,
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.4,
-  },
-  infoBox: {
-    borderRadius: 10,
-    backgroundColor: "white",
-  },
 });
