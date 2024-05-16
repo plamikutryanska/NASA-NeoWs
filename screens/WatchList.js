@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { StyleSheet, ImageBackground, FlatList } from "react-native";
 import { WatchListContext } from "@/store/context/watchListContext";
+import { formatData } from "@/utils/formatData";
 import { DUMMY_DATA } from "@/data/mockData";
 
 import EmptyState from "@/components/shared/EmptyState";
@@ -12,34 +13,8 @@ const WatchList = () => {
   const watchListData = DUMMY_DATA.filter((neo) => watchList.includes(neo.id));
 
   const displayWatchList = (itemData) => {
-    const nearEarthObject = itemData.item;
-    const title = nearEarthObject.name;
-    const shortList = [
-      {
-        title: "Approximate diameter in feet:",
-        value: `Min: ${nearEarthObject.approximateDiameterInFeet.minDiameter} Max: ${nearEarthObject.approximateDiameterInFeet.maxDiameter}`,
-      },
-      {
-        title: "Relative velocity in miles per hour:",
-        value: nearEarthObject.relativeVelocityInMilesPerHour,
-      },
-      {
-        title: "Miss distance in miles:",
-        value: nearEarthObject.missDistanceInMiles,
-      },
-      {
-        title: "Potentially hazardous:",
-        value: nearEarthObject.potentiallyHazardousAsteroid,
-      },
-    ];
-    const detailsTitleValueData = {
-      id: nearEarthObject.id,
-      shortList: shortList,
-    };
-
-    return (
-      <DetailsTile tileTitle={title} tileDetailsData={detailsTitleValueData} />
-    );
+    const data = formatData(itemData);
+    return <DetailsTile tileDetailsData={data} />;
   };
 
   return (

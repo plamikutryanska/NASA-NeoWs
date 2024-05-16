@@ -1,37 +1,11 @@
 import { StyleSheet, ImageBackground, FlatList } from "react-native";
 import DetailsTile from "../components/shared/DetailsTile";
 import { DUMMY_DATA } from "@/data/mockData";
+import { formatData } from "@/utils/formatData";
 
 const displayNearEarthObjects = (itemData) => {
-  const nearEarthObject = itemData.item;
-  const title = nearEarthObject.name;
-  const shortList = [
-    {
-      title: "Approximate diameter in feet:",
-      value: `Min: ${nearEarthObject.approximateDiameterInFeet.minDiameter} Max: ${nearEarthObject.approximateDiameterInFeet.maxDiameter}`,
-    },
-    {
-      title: "Relative velocity in miles per hour:",
-      value: nearEarthObject.relativeVelocityInMilesPerHour,
-    },
-    {
-      title: "Miss distance in miles:",
-      value: nearEarthObject.missDistanceInMiles,
-    },
-    {
-      title: "Potentially hazardous:",
-      value: nearEarthObject.potentiallyHazardousAsteroid,
-    },
-  ];
-  const detailsTitleValueData = {
-    id: nearEarthObject.id,
-    shortList: shortList,
-    longList: [...shortList],
-  };
-
-  return (
-    <DetailsTile tileTitle={title} tileDetailsData={detailsTitleValueData} />
-  );
+  const data = formatData(itemData);
+  return <DetailsTile tileDetailsData={data} />;
 };
 
 const NearEarthObjects = () => {

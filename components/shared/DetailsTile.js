@@ -2,13 +2,13 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { GlobalStyles } from "@/constants/styles";
 import { useNavigation } from "@react-navigation/native";
 
-const DetailsTile = ({ tileTitle, tileDetailsData }) => {
+const DetailsTile = ({ tileDetailsData }) => {
   const navigation = useNavigation();
 
   const openDetailsModalHandler = () => {
     navigation.navigate("NearEarthObject", {
       detailsData: {
-        name: tileTitle,
+        name: tileDetailsData.title,
         data: tileDetailsData,
       },
     });
@@ -21,10 +21,10 @@ const DetailsTile = ({ tileTitle, tileDetailsData }) => {
       }
       onPress={openDetailsModalHandler}>
       <View style={styles.sectionHeader}>
-        <Text style={styles.objectName}>{tileTitle}</Text>
+        <Text style={styles.objectName}>{tileDetailsData.title}</Text>
       </View>
       <View style={styles.objectDetailsContainer}>
-        {tileDetailsData.shortList.map((data, index) => {
+        {tileDetailsData.detailsTileData.map((data, index) => {
           return (
             <View key={index}>
               <Text style={styles.objectDetailsTitle}>{data.title}</Text>
