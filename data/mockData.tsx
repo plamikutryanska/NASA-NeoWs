@@ -1,4 +1,18 @@
-export const DUMMY_DATA = [
+export type NearEarthObject = {
+  approximateDiameterInFeet: {
+    maxDiameter: number;
+    minDiameter: number;
+  };
+  missDistanceInMiles: string;
+  id: string;
+  name: string;
+  potentiallyHazardousAsteroid: string;
+  relativeVelocityInMilesPerHour: string;
+};
+
+export type ResponseType = NearEarthObject[];
+
+export const DUMMY_DATA: ResponseType = [
   {
     approximateDiameterInFeet: {
       maxDiameter: 216.8827593336,

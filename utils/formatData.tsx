@@ -1,8 +1,21 @@
-export const formatData = (itemData) => {
-  const nearEarthObject = itemData.item;
-  const title = nearEarthObject.name;
+import { NearEarthObject } from "@/data/mockData";
 
-  const detailsTileData = [
+export type TitleValue = {
+  title: string;
+  value: string;
+};
+
+type DetailsDataType = {
+  id: string;
+  title: string;
+  detailsTileData: TitleValue[];
+};
+
+export const formatData = (itemData: any) => {
+  const nearEarthObject: NearEarthObject = itemData.item;
+  const title: string = nearEarthObject.name;
+
+  const detailsTileData: TitleValue[] = [
     {
       title: "Approximate diameter in feet:",
       value: `Min: ${nearEarthObject.approximateDiameterInFeet.minDiameter} Max: ${nearEarthObject.approximateDiameterInFeet.maxDiameter}`,
@@ -21,7 +34,7 @@ export const formatData = (itemData) => {
     },
   ];
 
-  const detailsData = {
+  const detailsData: DetailsDataType = {
     id: nearEarthObject.id,
     title,
     detailsTileData,

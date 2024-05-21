@@ -1,6 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
 
-const EmptyState = ({ message }) => {
+type EmptyStateProps = {
+  message: string;
+};
+
+const EmptyState = ({ message }: EmptyStateProps) => {
   return (
     <View style={styles.continer}>
       <Text>{message}</Text>

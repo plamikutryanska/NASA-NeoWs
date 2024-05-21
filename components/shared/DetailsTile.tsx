@@ -1,9 +1,35 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { GlobalStyles } from "@/constants/styles";
 import { useNavigation } from "@react-navigation/native";
+import { TitleValue } from "@/utils/formatData";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-const DetailsTile = ({ tileDetailsData }) => {
-  const navigation = useNavigation();
+type TileDetailsData = {
+  detailsTileData: TitleValue[];
+  id: string;
+  title: string;
+};
+
+type DetailsTileProps = {
+  tileDetailsData: TileDetailsData;
+};
+
+type NeoNavigationDetailsData = {
+  NearEarthObject: {
+    detailsData: {
+      name: string;
+      data: TileDetailsData;
+    };
+  };
+};
+
+type NavigationProp = NativeStackNavigationProp<
+  NeoNavigationDetailsData,
+  "NearEarthObject"
+>;
+
+const DetailsTile = ({ tileDetailsData }: DetailsTileProps) => {
+  const navigation = useNavigation<NavigationProp>();
 
   const openDetailsModalHandler = () => {
     navigation.navigate("NearEarthObject", {
@@ -24,7 +50,7 @@ const DetailsTile = ({ tileDetailsData }) => {
         <Text style={styles.objectName}>{tileDetailsData.title}</Text>
       </View>
       <View style={styles.objectDetailsContainer}>
-        {tileDetailsData.detailsTileData.map((data, index) => {
+        {tileDetailsData.detailsTileData?.map((data, index) => {
           return (
             <View key={index}>
               <Text style={styles.objectDetailsTitle}>{data.title}</Text>
@@ -62,7 +88,7 @@ const styles = StyleSheet.create({
     minWidth: "100%",
     padding: 12,
     justifyContent: "center",
-    alignItems: "left",
+    // alignItems: "left",
     backgroundColor: "white",
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
