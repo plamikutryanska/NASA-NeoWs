@@ -8,27 +8,27 @@ export const NearEarthObjectsContext = createContext({
 });
 
 export const NearEarthObjectsContextProvider = ({ children }) => {
-  const [todaysDate, setTodaysDate] = useState(new Date());
+  const todaysDate = new Date();
   const [formattedDate, setFormattedDate] = useState(
     getFormattedDate(todaysDate)
   );
-  const [apiResponseData, setApiResponseData] = useState([]);
+  const [apiResponse, setApiResponse] = useState([]);
 
   const { data } = UseNasaNearEarthObjects(formattedDate);
-  const apiResponse = getNearEarthObjectDetails({ data, formattedDate });
+  const response = getNearEarthObjectDetails({ data, formattedDate });
 
   useEffect(() => {
     setFormattedDate(getFormattedDate(todaysDate));
   }, [todaysDate]);
 
   useEffect(() => {
-    setApiResponseData(apiResponse);
-  }, [apiResponse.length]);
+    setApiResponse(response);
+  }, [response.length]);
 
-  console.log("in context =====>", apiResponseData);
+  console.log("in context =====>", apiResponse);
 
   const contextValue = {
-    apiResponse: apiResponseData,
+    apiResponse,
   };
 
   return (
