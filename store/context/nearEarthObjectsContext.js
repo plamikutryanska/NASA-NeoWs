@@ -25,8 +25,6 @@ export const NearEarthObjectsContextProvider = ({ children }) => {
     setApiResponse(response);
   }, [response.length]);
 
-  console.log("in context =====>", apiResponse);
-
   const contextValue = {
     apiResponse,
   };
