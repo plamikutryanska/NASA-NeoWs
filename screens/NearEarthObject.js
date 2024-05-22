@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { GlobalStyles } from "@/constants/styles";
 
 import IconButton from "@/components/shared/IconButton";
-import { WatchListContext } from "../store/context/watchListContext";
+import { WatchListContext } from "@/store/context/watchListContext";
 
 const NearEarthObject = ({ route }) => {
   const context = useContext(WatchListContext);

@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
-import { UseNasaNearEarthObjects } from "../../hooks/useNasaNearEarthObjects";
-import { getNearEarthObjectDetails } from "../../utils/getNearEarthObjectDetails";
-import { getFormattedDate } from "../../utils/getFormattedDate";
+import { UseNasaNearEarthObjects } from "@/hooks/useNasaNearEarthObjects";
+import { getNearEarthObjectDetails } from "@/utils/getNearEarthObjectDetails";
+import { getFormattedDate } from "@/utils/getFormattedDate";
 
 type NeoContextProps = {
   children: React.ReactNode;

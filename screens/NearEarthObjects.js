@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { StyleSheet, ImageBackground, FlatList } from "react-native";
 
-import DetailsTile from "../components/shared/DetailsTile";
+import DetailsTile from "@/components/shared/DetailsTile";
 import { NearEarthObjectsContext } from "@/store/context/nearEarthObjectsContext";
 import { formatData } from "@/utils/formatData";
 

@@ -3,7 +3,7 @@ import NearEarthObjects from "@/screens/NearEarthObjects";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { GlobalStyles } from "../../constants/styles";
+import { GlobalStyles } from "@/constants/styles";
 
 const BottomTabs = createBottomTabNavigator();
 
