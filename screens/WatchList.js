@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { StyleSheet, ImageBackground, FlatList } from "react-native";
 import { WatchListContext } from "@/store/context/watchListContext";
+import { NearEarthObjectsContext } from "@/store/context/nearEarthObjectsContext";
 import { formatData } from "@/utils/formatData";
-import { DUMMY_DATA } from "@/data/mockData";
 
 import EmptyState from "@/components/shared/EmptyState";
 import DetailsTile from "@/components/shared/DetailsTile";
@@ -10,7 +10,11 @@ import DetailsTile from "@/components/shared/DetailsTile";
 const WatchList = () => {
   const context = useContext(WatchListContext);
   const watchList = context.watchList;
-  const watchListData = DUMMY_DATA.filter((neo) => watchList.includes(neo.id));
+  const neoContext = useContext(NearEarthObjectsContext);
+  const neoApiResponse = neoContext.apiResponse;
+  const watchListData = neoApiResponse.filter((neo) =>
+    watchList.includes(neo.id)
+  );
 
   const displayWatchList = (itemData) => {
     const data = formatData(itemData);

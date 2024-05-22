@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import { StyleSheet, ImageBackground, FlatList } from "react-native";
+
 import DetailsTile from "../components/shared/DetailsTile";
-import { DUMMY_DATA } from "@/data/mockData";
+import { NearEarthObjectsContext } from "@/store/context/nearEarthObjectsContext";
 import { formatData } from "@/utils/formatData";
 
 const displayNearEarthObjects = (itemData) => {
@@ -9,6 +11,8 @@ const displayNearEarthObjects = (itemData) => {
 };
 
 const NearEarthObjects = () => {
+  const context = useContext(NearEarthObjectsContext);
+  const apiResponse = context.apiResponse;
   // ADD EMPTY STATE ONCE I HAVE REAL DATA
   return (
     <ImageBackground
@@ -17,7 +21,7 @@ const NearEarthObjects = () => {
       style={styles.container}
       imageStyle={styles.backgroundImage}>
       <FlatList
-        data={DUMMY_DATA}
+        data={apiResponse}
         renderItem={displayNearEarthObjects}
         keyExtractor={(item) => item.name}
       />
