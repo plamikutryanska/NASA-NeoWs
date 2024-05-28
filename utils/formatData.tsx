@@ -1,4 +1,4 @@
-import { NearEarthObject } from "@/data/mockData";
+import { ApiResponseObject } from "@/store/context/nearEarthObjectsContext";
 
 export type TitleValue = {
   title: string;
@@ -9,16 +9,17 @@ type DetailsDataType = {
   id: string;
   title: string;
   detailsTileData: TitleValue[];
+  modalDetailsData: TitleValue[];
 };
 
 export const formatData = (itemData: any) => {
-  const nearEarthObject: NearEarthObject = itemData.item;
+  const nearEarthObject: ApiResponseObject = itemData.item;
   const title: string = nearEarthObject.name;
 
   const detailsTileData: TitleValue[] = [
     {
-      title: "Approximate diameter in feet:",
-      value: `Min: ${nearEarthObject.approximateDiameterInFeet.minDiameter} Max: ${nearEarthObject.approximateDiameterInFeet.maxDiameter}`,
+      title: "Potentially hazardous:",
+      value: nearEarthObject.potentiallyHazardousAsteroid,
     },
     {
       title: "Relative velocity in miles per hour:",
@@ -29,8 +30,35 @@ export const formatData = (itemData: any) => {
       value: nearEarthObject.missDistanceInMiles,
     },
     {
-      title: "Potentially hazardous:",
-      value: nearEarthObject.potentiallyHazardousAsteroid,
+      title: "Approximate diameter in feet:",
+      value: `Min: ${nearEarthObject.approximateDiameterInFeet.minDiameter} Max: ${nearEarthObject.approximateDiameterInFeet.maxDiameter}`,
+    },
+  ];
+
+  const modalDetailsData: TitleValue[] = [
+    {
+      title: "Approximate diameter in kilometers:",
+      value: `Min: ${nearEarthObject.approximateDiameterInKilometers.minDiameter} Max: ${nearEarthObject.approximateDiameterInKilometers.maxDiameter}`,
+    },
+    {
+      title: "Approximate diameter in meters:",
+      value: `Min: ${nearEarthObject.approximateDiameterInMeters.minDiameter} Max: ${nearEarthObject.approximateDiameterInMeters.maxDiameter}`,
+    },
+    {
+      title: "Orbiting Body:",
+      value: nearEarthObject.orbitingBody,
+    },
+    {
+      title: "Is Sentry Object:",
+      value: nearEarthObject.isSentryObject.toString(),
+    },
+    {
+      title: "Neo Reference ID:",
+      value: nearEarthObject.neoReferenceId,
+    },
+    {
+      title: "Absolute Magnitude",
+      value: nearEarthObject.absoluteMagnitude.toString(),
     },
   ];
 
@@ -38,6 +66,7 @@ export const formatData = (itemData: any) => {
     id: nearEarthObject.id,
     title,
     detailsTileData,
+    modalDetailsData: [...detailsTileData, ...modalDetailsData],
   };
 
   return detailsData;

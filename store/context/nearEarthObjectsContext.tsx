@@ -7,16 +7,24 @@ type NeoContextProps = {
   children: React.ReactNode;
 };
 
+type MinMaxDiameter = {
+  minDiameter: number;
+  maxDiameter: number;
+};
+
 export type ApiResponseObject = {
   name: string;
   id: string;
-  approximateDiameterInFeet: {
-    minDiameter: number;
-    maxDiameter: number;
-  };
+  approximateDiameterInFeet: MinMaxDiameter;
+  approximateDiameterInKilometers: MinMaxDiameter;
+  approximateDiameterInMeters: MinMaxDiameter;
   relativeVelocityInMilesPerHour: string;
   missDistanceInMiles: string;
   potentiallyHazardousAsteroid: string;
+  orbitingBody: string;
+  isSentryObject: boolean;
+  neoReferenceId: string;
+  absoluteMagnitude: number;
 };
 
 type ApiResponse = {

@@ -1,14 +1,16 @@
 import { useContext } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList, ScrollView } from "react-native";
 import { GlobalStyles } from "@/constants/styles";
 
 import IconButton from "@/components/shared/IconButton";
 import { WatchListContext } from "@/store/context/watchListContext";
+import { formatData } from "@/utils/formatData";
 
 const NearEarthObject = ({ route }) => {
   const context = useContext(WatchListContext);
 
   const detailsData = route.params.detailsData;
+  console.log("detailsData ===>", detailsData);
   const neoId = detailsData.data.id;
 
   const neoIsInWatchList = context.watchList.includes(neoId);
@@ -24,8 +26,22 @@ const NearEarthObject = ({ route }) => {
     }
   };
 
+  const displayDetails = (itemData) => {
+    const data = formatData(itemData);
+    return (
+      <View>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.title}>{data.title}</Text>
+          <Text>{data.value}</Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={{ alignItems: "center" }}>
       <Text style={styles.name}>{detailsData.name}</Text>
       <IconButton
         buttonTitle={buttonTitle}
@@ -33,7 +49,22 @@ const NearEarthObject = ({ route }) => {
         activeStateButton={neoIsInWatchList}
         onPress={changeWatchListStatus}
       />
-    </View>
+      {/* <FlatList
+        data={detailsData.data.modalDetailsData}
+        renderItem={displayDetails}
+        keyExtractor={(item) => item.name}
+      /> */}
+      <View style={{ marginBottom: 64 }}>
+        {detailsData.data.modalDetailsData?.map((detail, index) => {
+          return (
+            <View key={index} style={styles.detailsContainer}>
+              <Text style={styles.title}>{detail.title}</Text>
+              <Text>{detail.value}</Text>
+            </View>
+          );
+        })}
+      </View>
+    </ScrollView>
   );
 };
 
@@ -42,12 +73,29 @@ export default NearEarthObject;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
     padding: 24,
   },
   name: {
     fontSize: 32,
     fontWeight: "bold",
     color: GlobalStyles.colors.primary700,
+    textAlign: "center",
+  },
+  detailsContainer: {
+    borderRadius: 16,
+    backgroundColor: "white",
+    marginVertical: 8,
+    padding: 24,
+    elevation: 3,
+    shadowColor: GlobalStyles.colors.primary700,
+    shadowRadius: 4,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.4,
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: GlobalStyles.colors.primary700,
+    marginBottom: 8,
   },
 });
