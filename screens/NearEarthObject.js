@@ -1,16 +1,14 @@
 import { useContext } from "react";
-import { View, Text, StyleSheet, FlatList, ScrollView } from "react-native";
-import { GlobalStyles } from "@/constants/styles";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 import IconButton from "@/components/shared/IconButton";
+import { GlobalStyles } from "@/constants/styles";
 import { WatchListContext } from "@/store/context/watchListContext";
-import { formatData } from "@/utils/formatData";
 
 const NearEarthObject = ({ route }) => {
   const context = useContext(WatchListContext);
 
   const detailsData = route.params.detailsData;
-  console.log("detailsData ===>", detailsData);
   const neoId = detailsData.data.id;
 
   const neoIsInWatchList = context.watchList.includes(neoId);
@@ -26,18 +24,6 @@ const NearEarthObject = ({ route }) => {
     }
   };
 
-  const displayDetails = (itemData) => {
-    const data = formatData(itemData);
-    return (
-      <View>
-        <View style={styles.detailsContainer}>
-          <Text style={styles.title}>{data.title}</Text>
-          <Text>{data.value}</Text>
-        </View>
-      </View>
-    );
-  };
-
   return (
     <ScrollView
       style={styles.container}
@@ -49,11 +35,6 @@ const NearEarthObject = ({ route }) => {
         activeStateButton={neoIsInWatchList}
         onPress={changeWatchListStatus}
       />
-      {/* <FlatList
-        data={detailsData.data.modalDetailsData}
-        renderItem={displayDetails}
-        keyExtractor={(item) => item.name}
-      /> */}
       <View style={{ marginBottom: 64 }}>
         {detailsData.data.modalDetailsData?.map((detail, index) => {
           return (
@@ -73,7 +54,7 @@ export default NearEarthObject;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 18,
   },
   name: {
     fontSize: 32,
