@@ -1,11 +1,19 @@
-import { useContext } from "react";
-import { StyleSheet, ImageBackground, FlatList } from "react-native";
+import React, { useContext } from "react";
+import {
+  StyleSheet,
+  ImageBackground,
+  FlatList,
+  ListRenderItemInfo,
+} from "react-native";
 
 import DetailsTile from "@/components/shared/DetailsTile";
 import { NearEarthObjectsContext } from "@/store/context/nearEarthObjectsContext";
 import { formatData } from "@/utils/formatData";
+import { ApiResponseObject } from "@/store/context/nearEarthObjectsContext";
 
-const displayNearEarthObjects = (itemData) => {
+const displayNearEarthObjects = (
+  itemData: ListRenderItemInfo<ApiResponseObject>
+): React.ReactElement => {
   const data = formatData(itemData);
   return <DetailsTile tileDetailsData={data} />;
 };
